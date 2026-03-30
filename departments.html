@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Departments</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Custom styling for the message box */
+    #messageBox {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #00c6ff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.5s, visibility 0.5s;
+        visibility: hidden;
+        z-index: 1000;
+    }
+    #messageBox.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>B.Tech Departments</h2>
+  </header>
+  <ul class="list">
+    <li onclick="showOnMap('Computer Science & Engineering (CSE)')">Computer Science & Engineering (CSE)</li>
+    <li onclick="showOnMap('Electronics & Communication Engineering (ECE)')">Electronics & Communication Engineering (ECE)</li>
+    <li onclick="showOnMap('Electrical & Electronics Engineering (EEE)')">Electrical & Electronics Engineering (EEE)</li>
+    <li onclick="showOnMap('Mechanical Engineering (ME)')">Mechanical Engineering (ME)</li>
+    <li onclick="showOnMap('Civil Engineering (CE)')">Civil Engineering (CE)</li>
+    <li onclick="showOnMap('Information Technology (IT)')">Information Technology (IT)</li>
+    <li onclick="showOnMap('Artificial Intelligence & Data Science (AIDS)')">Artificial Intelligence & Data Science (AIDS)</li>
+    <li onclick="showOnMap('Artificial Intelligence & Machine Learning (AIML)')">Artificial Intelligence & Machine Learning (AIML)</li>
+    <li onclick="showOnMap('Internet Of Things (IoT)')">Internet Of Things (IoT)</li>
+  </ul>
+  <button class="back-btn" onclick="window.history.back()">⬅ Back</button>
+  <div id="messageBox"></div>
+
+  <script>
+    // Helper function to display temporary messages (replaces alert())
+    function showMessage(message) {
+        const msgBox = document.getElementById('messageBox');
+        if (!msgBox) return; 
+        msgBox.textContent = message;
+        msgBox.classList.add('visible');
+        setTimeout(() => {
+            msgBox.classList.remove('visible');
+        }, 2000);
+    }
+
+    function showOnMap(place){
+      showMessage("Redirecting to map for: " + place);
+      // Delay redirection slightly so user can see the message
+      setTimeout(() => {
+        window.location.href = "map.html?place=" + encodeURIComponent(place);
+      }, 500);
+    }
+  </script>
+</body>
+</html>

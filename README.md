@@ -1,39 +1,80 @@
-# Smart Campus Navigation System
+# EE First
 
-This project is a Smart Campus Navigation System designed to help students and visitors easily locate different places within a campus.
+[![NPM version][npm-image]][npm-url]
+[![Build status][travis-image]][travis-url]
+[![Test coverage][coveralls-image]][coveralls-url]
+[![License][license-image]][license-url]
+[![Downloads][downloads-image]][downloads-url]
+[![Gittip][gittip-image]][gittip-url]
 
-## 📌 Overview
-The system provides basic navigation support by displaying paths and directions between different locations inside the campus.
+Get the first event in a set of event emitters and event pairs,
+then clean up after itself.
 
-## ⚙️ Features
-- Search for campus locations (labs, blocks, canteen)
-- Display directions between two points
-- Simple user interface using HTML and CSS
-- Basic navigation logic implementation
+## Install
 
-## 🛠️ Technologies Used
-- HTML
-- CSS
-- Arduino, ESP32, GSM Module
+```sh
+$ npm install ee-first
+```
 
-## 🔄 System Workflow
-1. User selects source and destination  
-2. System processes the input  
-3. Navigation path is displayed  
+## API
 
-## 🚧 Challenges Faced
-- Designing navigation logic  
-- Managing location mapping  
-- Creating user-friendly interface  
+```js
+var first = require('ee-first')
+```
 
-## 📈 Future Improvements
-- Add real-time map integration  
-- GPS-based tracking  
-- Mobile application support  
+### first(arr, listener)
 
-## ▶️ How to Run
-1. Open the project files  
-2. Run the HTML file in browser  
+Invoke `listener` on the first event from the list specified in `arr`. `arr` is
+an array of arrays, with each array in the format `[ee, ...event]`. `listener`
+will be called only once, the first time any of the given events are emitted. If
+`error` is one of the listened events, then if that fires first, the `listener`
+will be given the `err` argument.
 
-## 👤 Author
-Sajja Amruthanagaratnam
+The `listener` is invoked as `listener(err, ee, event, args)`, where `err` is the
+first argument emitted from an `error` event, if applicable; `ee` is the event
+emitter that fired; `event` is the string event name that fired; and `args` is an
+array of the arguments that were emitted on the event.
+
+```js
+var ee1 = new EventEmitter()
+var ee2 = new EventEmitter()
+
+first([
+  [ee1, 'close', 'end', 'error'],
+  [ee2, 'error']
+], function (err, ee, event, args) {
+  // listener invoked
+})
+```
+
+#### .cancel()
+
+The group of listeners can be cancelled before being invoked and have all the event
+listeners removed from the underlying event emitters.
+
+```js
+var thunk = first([
+  [ee1, 'close', 'end', 'error'],
+  [ee2, 'error']
+], function (err, ee, event, args) {
+  // listener invoked
+})
+
+// cancel and clean up
+thunk.cancel()
+```
+
+[npm-image]: https://img.shields.io/npm/v/ee-first.svg?style=flat-square
+[npm-url]: https://npmjs.org/package/ee-first
+[github-tag]: http://img.shields.io/github/tag/jonathanong/ee-first.svg?style=flat-square
+[github-url]: https://github.com/jonathanong/ee-first/tags
+[travis-image]: https://img.shields.io/travis/jonathanong/ee-first.svg?style=flat-square
+[travis-url]: https://travis-ci.org/jonathanong/ee-first
+[coveralls-image]: https://img.shields.io/coveralls/jonathanong/ee-first.svg?style=flat-square
+[coveralls-url]: https://coveralls.io/r/jonathanong/ee-first?branch=master
+[license-image]: http://img.shields.io/npm/l/ee-first.svg?style=flat-square
+[license-url]: LICENSE.md
+[downloads-image]: http://img.shields.io/npm/dm/ee-first.svg?style=flat-square
+[downloads-url]: https://npmjs.org/package/ee-first
+[gittip-image]: https://img.shields.io/gittip/jonathanong.svg?style=flat-square
+[gittip-url]: https://www.gittip.com/jonathanong/

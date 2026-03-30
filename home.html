@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Smart Campus - Home</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* New styles for the search bar */
+    .search-container {
+        margin: 20px auto;
+        width: 90%;
+        max-width: 500px;
+        display: flex;
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        border-radius: 8px;
+        overflow: hidden;
+    }
+    .search-container input {
+        flex-grow: 1;
+        border: none;
+        padding: 15px;
+        color: #333;
+        font-size: 16px;
+        border-radius: 0;
+    }
+    .search-container button {
+        background: #f7931e; /* A contrasting color for the search button */
+        color: white;
+        padding: 15px 20px;
+        font-weight: bold;
+        border-radius: 0;
+        transition: background 0.2s;
+    }
+    .search-container button:hover {
+        background: #d47e18;
+    }
+
+    /* Adjusting card margin for better flow */
+    .cards-container {
+        margin-top: 30px;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Welcome to Smart Campus Navigation</h2>
+    <p>Explore your college campus easily using IoT and Google Maps</p>
+  </header>
+
+  <div class="search-container">
+    <input type="text" id="globalSearch" placeholder="Search for a Lab, Canteen, or Department...">
+    <button onclick="handleSearch()">Search</button>
+  </div>
+
+  <section class="cards-container">
+    <div class="card" onclick="openPage('departments.html')">
+      <h3>Departments</h3>
+      <p>View all B.Tech departments and their branches</p>
+    </div>
+    <div class="card" onclick="openPage('facilities.html')">
+      <h3>Facilities</h3>
+      <p>Canteen, Courts, Gym, Labs, Parking and more</p>
+    </div>
+    <div class="card" onclick="openPage('map.html')">
+      <h3>Campus Map</h3>
+      <p>View campus locations on interactive Google Map (with Live IoT Tracking)</p>
+    </div>
+  </section>
+  
+  <div id="messageBox"></div>
+
+  <script>
+    // Helper function to display temporary messages
+    function showMessage(message) {
+        let msgBox = document.getElementById('messageBox');
+        if (!msgBox) {
+            msgBox = document.createElement('div');
+            msgBox.id = 'messageBox';
+            document.body.appendChild(msgBox);
+            // Basic styling if the box doesn't exist (should match other files)
+            msgBox.style.cssText = 'position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background-color:#f7931e;color:white;padding:10px 20px;border-radius:8px;box-shadow:0 4px 6px rgba(0, 0, 0, 0.1);opacity:0;transition:opacity 0.5s, visibility 0.5s;visibility:hidden;z-index:1000;';
+        }
+        msgBox.textContent = message;
+        msgBox.style.opacity = '1';
+        msgBox.style.visibility = 'visible';
+        setTimeout(() => {
+            msgBox.style.opacity = '0';
+            msgBox.style.visibility = 'hidden';
+        }, 2000);
+    }
+
+    function openPage(page){
+      window.location.href = page;
+    }
+    
+    function handleSearch() {
+        const query = document.getElementById('globalSearch').value.trim();
+        if (query) {
+            showMessage(`Searching for: ${query}. Redirecting to map...`);
+            // Redirects to map.html with the search query
+            setTimeout(() => {
+                window.location.href = "map.html?place=" + encodeURIComponent(query);
+            }, 500);
+        } else {
+            showMessage("Please enter a location to search.");
+        }
+    }
+    
+    // Allow pressing Enter key to search
+    document.getElementById('globalSearch').addEventListener('keypress', function(e) {
+        if (e.key === 'Enter') {
+            handleSearch();
+        }
+    });
+  </script>
+</body>
+</html>

@@ -1,0 +1,100 @@
+body {
+  font-family: 'Poppins', sans-serif;
+  margin: 0;
+  background: linear-gradient(135deg, #0072ff, #00c6ff);
+  color: white;
+  text-align: center;
+}
+
+header {
+  background: rgba(0,0,0,0.3);
+  padding: 20px;
+  border-bottom: 2px solid white;
+}
+
+.login-container {
+  width: 90%;
+  max-width: 400px;
+  background: rgba(255,255,255,0.1);
+  margin: 80px auto;
+  padding: 30px;
+  border-radius: 15px;
+  box-shadow: 0 0 15px rgba(255,255,255,0.3);
+}
+
+input {
+  width: 80%;
+  padding: 10px;
+  margin: 10px;
+  border: none;
+  border-radius: 8px;
+  outline: none;
+}
+
+button {
+  padding: 10px 20px;
+  border: none;
+  background: #00c6ff;
+  color: white;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+button:hover {
+  background: #0099cc;
+}
+
+.cards-container {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 20px;
+  margin: 40px;
+}
+
+.card {
+  background: rgba(255,255,255,0.1);
+  width: 250px;
+  padding: 20px;
+  border-radius: 15px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.card:hover {
+  background: rgba(255,255,255,0.3);
+  transform: scale(1.05);
+}
+
+.list {
+  list-style: none;
+  padding: 0;
+  margin-top: 20px;
+}
+
+.list li {
+  background: rgba(255,255,255,0.1);
+  margin: 10px;
+  padding: 15px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.list li:hover {
+  background: rgba(255,255,255,0.3);
+}
+
+.back-btn {
+  margin-top: 20px;
+  background: #fff;
+  color: #0072ff;
+}
+
+#map {
+  height: 80vh;
+  width: 90%;
+  margin: 20px auto;
+  border-radius: 10px;
+}

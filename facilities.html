@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Campus Facilities</title>
+  <link rel="stylesheet" href="style.css">
+  <style>
+    /* Custom styling for the message box */
+    #messageBox {
+        position: fixed;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #00c6ff;
+        color: white;
+        padding: 10px 20px;
+        border-radius: 8px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        opacity: 0;
+        transition: opacity 0.5s, visibility 0.5s;
+        visibility: hidden;
+        z-index: 1000;
+    }
+    #messageBox.visible {
+        opacity: 1;
+        visibility: visible;
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <h2>Campus Facilities</h2>
+  </header>
+  <ul class="list">
+    <!-- Updated names to match server.js locations where possible -->
+    <li onclick="showOnMap('Main Canteen')">Main Canteen</li> 
+    <li onclick="showOnMap('Main Playground/Ground')">Main Playground/Ground</li>
+    <li onclick="showOnMap('Girls Hostel')">Girls Hostel</li>
+    <li onclick="showOnMap('Stationery Shop')">Stationery Shop</li>
+    <li onclick="showOnMap('Dispensary')">Dispensary (Pharmacy Block)</li>
+    <li onclick="showOnMap('Main Seminar Hall')">Main Seminar Hall</li>
+    <!-- Remaining facilities from original list -->
+    <li onclick="showOnMap('Basketball Court')">Basketball Court</li>
+    <li onclick="showOnMap('Kabaddi Court')">Kabaddi Court</li>
+    <li onclick="showOnMap('Volleyball Court')">Volleyball Court</li>
+    <li onclick="showOnMap('Gym')">Gym</li>
+    <li onclick="showOnMap('CFSS Block')">CFSS Block</li>
+    <li onclick="showOnMap('CFRO Block')">CFRO Block</li>
+    <li onclick="showOnMap('EWS Labs')">EWS Labs</li>
+    <li onclick="showOnMap('Bus Parking')">Bus Parking</li>
+    <li onclick="showOnMap('Student Parking')">Student Vehicle Parking</li>
+    <li onclick="showOnMap('Staff Parking')">Staff Vehicle Parking</li>
+  </ul>
+  <button class="back-btn" onclick="window.history.back()">⬅ Back</button>
+  <div id="messageBox"></div>
+
+   <script>
+    // Helper function to display temporary messages (replaces alert())
+    function showMessage(message) {
+        const msgBox = document.getElementById('messageBox');
+        if (!msgBox) return;
+        msgBox.textContent = message;
+        msgBox.classList.add('visible');
+        setTimeout(() => {
+            msgBox.classList.remove('visible');
+        }, 2000);
+    }
+
+    function showOnMap(place){
+      showMessage("Redirecting to map for: " + place);
+      // Delay redirection slightly so user can see the message
+      setTimeout(() => {
+        window.location.href = "map.html?place=" + encodeURIComponent(place);
+      }, 500);
+    }
+  </script>
+</body>
+</html>
