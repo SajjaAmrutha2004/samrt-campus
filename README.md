@@ -14,8 +14,7 @@ The system provides basic navigation support by displaying paths and directions 
 ## 🛠️ Technologies Used
 - HTML
 - CSS
-- Basic JavaScript (if used)
-- Arduino (optional, if any hardware used)
+- Arduino, ESP32, GSM Module
 
 ## 🔄 System Workflow
 1. User selects source and destination  
